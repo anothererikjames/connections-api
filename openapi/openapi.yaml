@@ -1,0 +1,67 @@
+openapi: '3.0.3'
+info:
+  title: Connections API
+  version: 2.0.0
+  description: Third-party integration and connection management
+  contact:
+    name: Integrations Team
+    email: connections@acme.com
+paths:
+  /connections:
+    get:
+      summary: List connections
+      operationId: listConnections
+      tags: [Connections]
+      responses:
+        '200':
+          description: Connections list
+    post:
+      summary: Create connection
+      operationId: createConnection
+      tags: [Connections]
+      responses:
+        '201':
+          description: Connection created
+  /connections/{id}:
+    get:
+      summary: Get connection
+      operationId: getConnection
+      tags: [Connections]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Connection details
+    delete:
+      summary: Delete connection
+      operationId: deleteConnection
+      tags: [Connections]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '204':
+          description: Connection deleted
+  /webhooks:
+    get:
+      summary: List webhooks
+      operationId: listWebhooks
+      tags: [Webhooks]
+      responses:
+        '200':
+          description: Webhooks list
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: /oauth/token
+          scopes:
+            read: Read access
+            write: Write access
